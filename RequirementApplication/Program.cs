@@ -13,10 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Register controllers.
 builder.Services.AddControllers();
 
-// Register EF Core In-Memory database.
-//builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("RequirementsDatabase"));
-
-builder.Services.AddSingleton<IRequirementRepository, InMemoryRequirementRepository>();
+// Register application repository.
+builder.Services.AddScoped<IRequirementRepository, RequirementRepository>();
 
 // Register application services.
 builder.Services.AddScoped<IRequirementService, RequirementService>();
@@ -28,6 +26,9 @@ builder.Services.AddSwaggerGen();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// Get connection string and register DbContext
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

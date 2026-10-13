@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RequirementAPI.Models;
+using System.Reflection.Emit;
 
 namespace RequirementAPI.Data.Configurations
 {
@@ -17,6 +18,11 @@ namespace RequirementAPI.Data.Configurations
                 .HasMaxLength(100);
 
             builder.HasIndex(t => t.Name).IsUnique();
+            builder.HasData(
+                new Tag { Id = 1, Name = "Backend" },
+                new Tag { Id = 2, Name = "Security" },
+                new Tag { Id = 3, Name = "API" }
+            );
         }
     }
 }

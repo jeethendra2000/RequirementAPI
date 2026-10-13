@@ -21,7 +21,6 @@ namespace RequirementAPI.Controllers
         /// Retrieves all Requirements.
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(List<RequirementResponseDto>), 200)]
         public async Task<ActionResult<List<RequirementResponseDto>>> GetAll()
         {
             var requirements = await _service.GetAllAsync();
@@ -33,8 +32,6 @@ namespace RequirementAPI.Controllers
         /// Retrieves a Requirement by its ID.
         /// </summary>
         [HttpGet("{id:int}")]
-        [ProducesResponseType(typeof(RequirementResponseDto), 200)]
-        [ProducesResponseType(404)]
         public async Task<ActionResult<RequirementResponseDto>> GetById(int id)
         {
             var requirement = await _service.GetByIdAsync(id);
@@ -54,8 +51,6 @@ namespace RequirementAPI.Controllers
         /// Creates a new Requirement.
         /// </summary>
         [HttpPost]
-        [ProducesResponseType(typeof(RequirementResponseDto), 201)]
-        [ProducesResponseType(400)]
         public async Task<ActionResult<RequirementResponseDto>> Create(CreateRequirementDto dto)
         {
             var created = await _service.CreateAsync(dto);
