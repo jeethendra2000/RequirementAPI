@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using RequirementAPI.Data;
+using RequirementAPI.DTOs;
 using RequirementAPI.Models;
 using RequirementAPI.Repositories.Interfaces;
 
@@ -49,5 +50,21 @@ namespace RequirementAPI.Repositories
             return requirement;
         }
 
+        public async Task<List<RequirementHistoryDto>> GetRequirementHistoryAsync(int id)
+        {
+            return await _context.Requirements
+               .TemporalAll()
+               .Where(r => r.Id == id)
+               .Select(r => new RequirementHistoryDto
+               {
+                   Id = r.Id,
+                   Title = r.Title,
+                   Description = r.Description,
+                   ValidFrom = EF.Property<DateTime>(r, "PeriodStart"),
+                   ValidTo = EF.Property<DateTime>(r, "PeriodEnd")
+               })
+               .OrderBy(x => x.ValidFrom)
+               .ToListAsync();
+        }
     }
 }

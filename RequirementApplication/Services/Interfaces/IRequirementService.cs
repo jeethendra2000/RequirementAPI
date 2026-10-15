@@ -9,6 +9,7 @@ namespace RequirementAPI.Services.Interfaces
         Task<RequirementResponseDto?> GetByIdAsync(int id);
 
         Task<RequirementResponseDto> CreateAsync(CreateRequirementDto dto);
+        Task<List<RequirementHistoryDto>> GetRequirementHistoryAsync(int id);
 
     }
 }

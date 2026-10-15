@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RequirementAPI.DTOs;
 using RequirementAPI.Models;
 using RequirementAPI.Services.Interfaces;
@@ -56,6 +57,17 @@ namespace RequirementAPI.Controllers
             var created = await _service.CreateAsync(dto);
 
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+        }
+
+        [HttpGet("history/{id}")]
+        public async Task<IActionResult> GetHistory(int id)
+        {
+            var history = await _service.GetRequirementHistoryAsync(id);
+
+            if (history.Count == 0)
+                return NotFound($"No history found for Requirement Id {id}");
+
+            return Ok(history);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace RequirementAPI.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {
-            builder.ToTable("Tags");
+            builder.ToTable("Tags", b => b.IsTemporal());
 
             builder.HasKey(t => t.Id);
 

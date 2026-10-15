@@ -71,5 +71,12 @@ namespace RequirementAPI.Services
                 }).ToList()
             };
         }
+
+        public async Task<List<RequirementHistoryDto>> GetRequirementHistoryAsync(int id)
+        {
+            var history = await _repository.GetRequirementHistoryAsync(id);
+
+            return history;
+        }
     }
 }

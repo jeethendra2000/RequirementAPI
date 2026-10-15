@@ -1,4 +1,5 @@
-﻿using RequirementAPI.Models;
+﻿using RequirementAPI.DTOs;
+using RequirementAPI.Models;
 
 namespace RequirementAPI.Repositories.Interfaces
 {
@@ -7,5 +8,6 @@ namespace RequirementAPI.Repositories.Interfaces
         Task<List<Requirement>> GetAllAsync();
         Task<Requirement?> GetByIdAsync(int id);
         Task<Requirement> AddAsync(Requirement requirement);
+        Task<List<RequirementHistoryDto>> GetRequirementHistoryAsync(int id);
     }
 }

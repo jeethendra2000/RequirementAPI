@@ -1,4 +1,5 @@
-﻿using RequirementAPI.Models;
+﻿using RequirementAPI.DTOs;
+using RequirementAPI.Models;
 using RequirementAPI.Repositories.Interfaces;
 
 namespace RequirementAPI.Repositories
@@ -59,5 +60,9 @@ namespace RequirementAPI.Repositories
             });
         }
 
+        public Task<List<RequirementHistoryDto>> GetRequirementHistoryAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,13 +8,14 @@ namespace RequirementAPI.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<TaskItem> builder)
         {
-            builder.ToTable("Tasks");
+            builder.ToTable("Tasks", b => b.IsTemporal());
 
             builder.HasKey(t => t.Id);
 
             builder.Property(t => t.Title)
                 .IsRequired()
                 .HasMaxLength(200);
+
             builder.HasData(
                 new TaskItem
                 {
